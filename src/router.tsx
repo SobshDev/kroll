@@ -9,7 +9,7 @@ export function getRouter() {
   const convexUrl = import.meta.env.VITE_CONVEX_URL
 
   if (!convexUrl) {
-    throw new Error('Missing VITE_CONVEX_URL. Copy .env.example to .env.local.')
+    throw new Error('Missing VITE_CONVEX_URL in your environment')
   }
 
   const convexClient = new ConvexReactClient(convexUrl, {
