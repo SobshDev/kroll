@@ -6,15 +6,17 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "concurrently --kill-others --names web,convex --prefix-colors cyan,magenta \"bun run dev:web\" \"bun run dev:convex\"",
+    "dev:web": "vite dev --port 3000",
     "dev:convex": "convex dev",
     "generate-routes": "tsr generate",
+    "typecheck": "tsc --noEmit",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "lint": "eslint",
     "format": "prettier --write . && eslint --fix",
-    "check": "prettier --check ."
+    "check": "./scripts/check.sh"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -51,6 +53,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
+    "concurrently": "^10.0.3",
     "eslint": "^9.20.0",
     "jsdom": "^28.1.0",
     "prettier": "^3.8.1",
